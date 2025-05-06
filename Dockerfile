@@ -1,13 +1,7 @@
-# Use official Python image
-FROM python:3.10-slim
-
-# Set work directory
+# Dockerfile
+FROM python:3.9-slim
 WORKDIR /app
-
-# Copy files
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-
-COPY app/ ./app/
-WORKDIR /app
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "main:app"]
+COPY . .
+CMD ["gunicorn", "-b", ":8080", "main:app"]
